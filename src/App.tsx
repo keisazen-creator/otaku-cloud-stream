@@ -3,8 +3,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import Index from "./pages/Index";
+import AnimePage from "./pages/AnimePage";
+import AnimeDetail from "./pages/AnimeDetail";
+import SearchPage from "./pages/SearchPage";
+import GenresPage from "./pages/GenresPage";
+import ProfilePage from "./pages/ProfilePage";
+import NewReleasesPage from "./pages/NewReleasesPage";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -16,7 +22,12 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/anime" element={<AnimePage />} />
+          <Route path="/anime/:id" element={<AnimeDetail />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/genres" element={<GenresPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/new-releases" element={<NewReleasesPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
