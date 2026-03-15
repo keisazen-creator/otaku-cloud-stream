@@ -10,6 +10,7 @@ import SearchPage from "./pages/SearchPage";
 import GenresPage from "./pages/GenresPage";
 import ProfilePage from "./pages/ProfilePage";
 import NewReleasesPage from "./pages/NewReleasesPage";
+import InstallPage from "./pages/InstallPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/genres" element={<GenresPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/new-releases" element={<NewReleasesPage />} />
+          <Route path="/install" element={<InstallPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
