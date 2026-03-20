@@ -1,3 +1,4 @@
+
 # 🌌 OtakuCloud Stream
 
 <p align="center">
@@ -55,7 +56,14 @@
 ## 🖼️ App Preview
 
 <p align="center">
-  <img src="https://i.imgur.com/6Iej2c3.png" width="80%" />
+  <img src="YOUR_IMAGE_LINK_1" width="30%" />
+  <img src="YOUR_IMAGE_LINK_2" width="30%" />
+  <img src="YOUR_IMAGE_LINK_3" width="30%" />
+</p>
+
+<p align="center">
+  <img src="YOUR_IMAGE_LINK_4" width="30%" />
+  <img src="YOUR_IMAGE_LINK_5" width="30%" />
 </p>
 
 ---
