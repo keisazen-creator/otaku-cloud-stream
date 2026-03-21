@@ -21,19 +21,19 @@ export default function WatchlistPage() {
 
   useEffect(() => {
     if (!user) { setLoading(false); return; }
-    supabase
+    (supabase as any)
       .from("watchlist")
       .select("*")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false })
-      .then(({ data }) => {
+      .then(({ data }: any) => {
         setItems((data as WatchlistItem[]) || []);
         setLoading(false);
       });
   }, [user]);
 
   const removeItem = async (id: string) => {
-    await supabase.from("watchlist").delete().eq("id", id);
+    await (supabase as any).from("watchlist").delete().eq("id", id);
     setItems((prev) => prev.filter((i) => i.id !== id));
   };
 
