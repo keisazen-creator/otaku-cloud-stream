@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Search, Menu, X, User, Bell } from "lucide-react";
+import { Search, Menu, X, User, Bell, Heart, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/hooks/useAuth";
 
 const NAV_LINKS = [
   { label: "Home", path: "/" },
   { label: "Anime", path: "/anime" },
   { label: "Genres", path: "/genres" },
+  { label: "Seasonal", path: "/seasonal" },
   { label: "New Releases", path: "/new-releases" },
-  { label: "Search", path: "/search" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -31,7 +33,6 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center glow-primary-sm group-hover:glow-primary transition-shadow">
             <span className="font-display font-bold text-primary-foreground text-sm">O</span>
@@ -41,7 +42,6 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-1">
           {NAV_LINKS.map((link) => (
             <Link
@@ -58,23 +58,24 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Right side */}
         <div className="flex items-center gap-2">
-          <Link
-            to="/search"
-            className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-          >
+          <Link to="/search" className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
             <Search size={18} />
           </Link>
-          <button className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors hidden sm:flex">
-            <Bell size={18} />
-          </button>
-          <Link
-            to="/profile"
-            className="w-9 h-9 rounded-lg bg-primary/20 flex items-center justify-center text-primary hover:bg-primary/30 transition-colors"
-          >
-            <User size={18} />
-          </Link>
+          {user && (
+            <Link to="/watchlist" className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors hidden sm:flex">
+              <Heart size={18} />
+            </Link>
+          )}
+          {user ? (
+            <Link to="/profile" className="w-9 h-9 rounded-lg bg-primary/20 flex items-center justify-center text-primary hover:bg-primary/30 transition-colors">
+              <User size={18} />
+            </Link>
+          ) : (
+            <Link to="/login" className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors">
+              Sign In
+            </Link>
+          )}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground"
@@ -84,7 +85,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -107,6 +107,16 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
+              {user && (
+                <>
+                  <Link to="/watchlist" className="px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50">
+                    Watchlist
+                  </Link>
+                  <button onClick={() => signOut()} className="px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 text-left">
+                    Sign Out
+                  </button>
+                </>
+              )}
             </div>
           </motion.div>
         )}
