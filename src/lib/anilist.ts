@@ -111,3 +111,28 @@ export async function getRecentAnime(page = 1, perPage = 20): Promise<Anime[]> {
   const data = (await queryAniList(query, { page, perPage })) as AniListResponse;
   return data.data.Page.media;
 }
+
+export async function getSeasonalAnime(season: string, year: number, page = 1, perPage = 20): Promise<Anime[]> {
+  const query = `
+    query ($page: Int, $perPage: Int, $season: MediaSeason, $seasonYear: Int) {
+      Page(page: $page, perPage: $perPage) {
+        media(type: ANIME, season: $season, seasonYear: $seasonYear, sort: POPULARITY_DESC, isAdult: false) { ${MEDIA_FRAGMENT} }
+      }
+    }
+  `;
+  const data = (await queryAniList(query, { page, perPage, season, seasonYear: year })) as AniListResponse;
+  return data.data.Page.media;
+}
+
+export async function getRandomAnime(): Promise<Anime> {
+  const randomPage = Math.floor(Math.random() * 50) + 1;
+  const query = `
+    query ($page: Int) {
+      Page(page: $page, perPage: 1) {
+        media(type: ANIME, sort: POPULARITY_DESC, isAdult: false) { ${MEDIA_FRAGMENT} }
+      }
+    }
+  `;
+  const data = (await queryAniList(query, { page: randomPage })) as AniListResponse;
+  return data.data.Page.media[0];
+}

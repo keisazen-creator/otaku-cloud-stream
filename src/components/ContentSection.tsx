@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import AnimeCard from "./AnimeCard";
 import type { Anime } from "@/lib/types";
@@ -7,9 +8,10 @@ interface ContentSectionProps {
   title: string;
   anime: Anime[];
   loading?: boolean;
+  viewAllPath?: string;
 }
 
-export default function ContentSection({ title, anime, loading }: ContentSectionProps) {
+export default function ContentSection({ title, anime, loading, viewAllPath }: ContentSectionProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: "left" | "right") => {
@@ -23,7 +25,12 @@ export default function ContentSection({ title, anime, loading }: ContentSection
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-display font-semibold text-foreground">{title}</h2>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
+            {viewAllPath && (
+              <Link to={viewAllPath} className="text-xs text-primary hover:underline mr-2">
+                View All
+              </Link>
+            )}
             <button
               onClick={() => scroll("left")}
               className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
