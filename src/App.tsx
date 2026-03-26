@@ -38,6 +38,7 @@ const App = () => (
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/new-releases" element={<NewReleasesPage />} />
             <Route path="/seasonal" element={<SeasonalPage />} />
+            <Route path="/manga" element={<MangaPage />} />
             <Route path="/watchlist" element={<WatchlistPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/install" element={<InstallPage />} />
