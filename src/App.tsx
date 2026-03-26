@@ -16,6 +16,7 @@ import LoginPage from "./pages/LoginPage";
 import WatchPage from "./pages/WatchPage";
 import WatchlistPage from "./pages/WatchlistPage";
 import SeasonalPage from "./pages/SeasonalPage";
+import MangaPage from "./pages/MangaPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/new-releases" element={<NewReleasesPage />} />
             <Route path="/seasonal" element={<SeasonalPage />} />
+            <Route path="/manga" element={<MangaPage />} />
             <Route path="/watchlist" element={<WatchlistPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/install" element={<InstallPage />} />

@@ -10,8 +10,10 @@ import Footer from "@/components/Footer";
 const GENRES = [
   "Action", "Adventure", "Fantasy", "Romance", "Comedy",
   "Horror", "Sci-Fi", "Slice of Life", "Mecha", "Drama",
-  "Mystery", "Sports", "Music", "Supernatural",
+  "Mystery", "Sports", "Music", "Supernatural", "Ecchi", "Hentai",
 ];
+
+const ADULT_GENRES = ["Hentai"];
 
 export default function GenresPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -21,7 +23,8 @@ export default function GenresPage() {
 
   useEffect(() => {
     setLoading(true);
-    getAnimeByGenre(selected, 1, 24)
+    const isAdult = ADULT_GENRES.includes(selected);
+    getAnimeByGenre(selected, 1, 24, isAdult)
       .then(setAnime)
       .finally(() => setLoading(false));
   }, [selected]);

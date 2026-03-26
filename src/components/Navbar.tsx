@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 const NAV_LINKS = [
   { label: "Home", path: "/" },
   { label: "Anime", path: "/anime" },
+  { label: "Manga", path: "/manga" },
   { label: "Genres", path: "/genres" },
   { label: "Seasonal", path: "/seasonal" },
   { label: "New Releases", path: "/new-releases" },
