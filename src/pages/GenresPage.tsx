@@ -23,7 +23,8 @@ export default function GenresPage() {
 
   useEffect(() => {
     setLoading(true);
-    getAnimeByGenre(selected, 1, 24)
+    const isAdult = ADULT_GENRES.includes(selected);
+    getAnimeByGenre(selected, 1, 24, isAdult)
       .then(setAnime)
       .finally(() => setLoading(false));
   }, [selected]);
