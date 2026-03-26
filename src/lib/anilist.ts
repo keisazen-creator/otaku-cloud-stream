@@ -138,3 +138,73 @@ export async function getRandomAnime(): Promise<Anime> {
   const data = (await queryAniList(query, { page: randomPage })) as AniListResponse;
   return data.data.Page.media[0];
 }
+
+// ---- MANGA FUNCTIONS ----
+
+const MANGA_FRAGMENT = `
+  id
+  title { romaji english native }
+  description
+  coverImage { extraLarge large color }
+  bannerImage
+  genres
+  averageScore
+  chapters
+  volumes
+  status
+  format
+`;
+
+export interface MangaResponse {
+  data: { Page: { media: Manga[] } };
+}
+
+export interface Manga {
+  id: number;
+  title: { romaji: string; english: string | null; native: string | null };
+  description: string | null;
+  coverImage: { extraLarge: string; large: string; color: string | null };
+  bannerImage: string | null;
+  genres: string[];
+  averageScore: number | null;
+  chapters: number | null;
+  volumes: number | null;
+  status: string | null;
+  format: string | null;
+}
+
+export async function getTrendingManga(page = 1, perPage = 20): Promise<Manga[]> {
+  const query = `
+    query ($page: Int, $perPage: Int) {
+      Page(page: $page, perPage: $perPage) {
+        media(type: MANGA, sort: TRENDING_DESC, isAdult: false) { ${MANGA_FRAGMENT} }
+      }
+    }
+  `;
+  const data = (await queryAniList(query, { page, perPage })) as MangaResponse;
+  return data.data.Page.media;
+}
+
+export async function getPopularManga(page = 1, perPage = 20): Promise<Manga[]> {
+  const query = `
+    query ($page: Int, $perPage: Int) {
+      Page(page: $page, perPage: $perPage) {
+        media(type: MANGA, sort: POPULARITY_DESC, isAdult: false) { ${MANGA_FRAGMENT} }
+      }
+    }
+  `;
+  const data = (await queryAniList(query, { page, perPage })) as MangaResponse;
+  return data.data.Page.media;
+}
+
+export async function searchManga(search: string, page = 1, perPage = 20): Promise<Manga[]> {
+  const query = `
+    query ($page: Int, $perPage: Int, $search: String) {
+      Page(page: $page, perPage: $perPage) {
+        media(type: MANGA, search: $search, sort: SEARCH_MATCH, isAdult: false) { ${MANGA_FRAGMENT} }
+      }
+    }
+  `;
+  const data = (await queryAniList(query, { page, perPage, search })) as MangaResponse;
+  return data.data.Page.media;
+}
