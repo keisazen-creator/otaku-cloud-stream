@@ -11,6 +11,12 @@ const GENRES = [
   { name: "Sci-Fi", color: "from-cyan-500/20 to-blue-500/20", border: "border-cyan-500/20" },
   { name: "Slice of Life", color: "from-lime-500/20 to-green-500/20", border: "border-lime-500/20" },
   { name: "Mecha", color: "from-indigo-500/20 to-blue-500/20", border: "border-indigo-500/20" },
+  { name: "Ecchi", color: "from-pink-600/20 to-fuchsia-500/20", border: "border-pink-600/20" },
+  { name: "Hentai", color: "from-rose-600/20 to-red-600/20", border: "border-rose-600/20", nsfw: true },
+  { name: "Drama", color: "from-amber-500/20 to-orange-500/20", border: "border-amber-500/20" },
+  { name: "Mystery", color: "from-slate-500/20 to-gray-500/20", border: "border-slate-500/20" },
+  { name: "Supernatural", color: "from-purple-600/20 to-indigo-500/20", border: "border-purple-600/20" },
+  { name: "Sports", color: "from-green-500/20 to-emerald-500/20", border: "border-green-500/20" },
 ];
 
 export default function GenreGrid() {

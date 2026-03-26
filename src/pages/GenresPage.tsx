@@ -10,8 +10,10 @@ import Footer from "@/components/Footer";
 const GENRES = [
   "Action", "Adventure", "Fantasy", "Romance", "Comedy",
   "Horror", "Sci-Fi", "Slice of Life", "Mecha", "Drama",
-  "Mystery", "Sports", "Music", "Supernatural",
+  "Mystery", "Sports", "Music", "Supernatural", "Ecchi", "Hentai",
 ];
+
+const ADULT_GENRES = ["Hentai"];
 
 export default function GenresPage() {
   const [searchParams, setSearchParams] = useSearchParams();
