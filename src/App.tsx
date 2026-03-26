@@ -16,6 +16,7 @@ import LoginPage from "./pages/LoginPage";
 import WatchPage from "./pages/WatchPage";
 import WatchlistPage from "./pages/WatchlistPage";
 import SeasonalPage from "./pages/SeasonalPage";
+import MangaPage from "./pages/MangaPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
