@@ -66,15 +66,17 @@ export async function getTopRatedAnime(page = 1, perPage = 20): Promise<Anime[]>
   return data.data.Page.media;
 }
 
-export async function getAnimeByGenre(genre: string, page = 1, perPage = 20): Promise<Anime[]> {
+export async function getAnimeByGenre(genre: string, page = 1, perPage = 20, isAdult = false): Promise<Anime[]> {
+  const adultGenres = ["Hentai"];
+  const forceAdult = adultGenres.includes(genre) || isAdult;
   const query = `
-    query ($page: Int, $perPage: Int, $genre: String) {
+    query ($page: Int, $perPage: Int, $genre: String, $isAdult: Boolean) {
       Page(page: $page, perPage: $perPage) {
-        media(type: ANIME, genre: $genre, sort: POPULARITY_DESC, isAdult: false) { ${MEDIA_FRAGMENT} }
+        media(type: ANIME, genre: $genre, sort: POPULARITY_DESC, isAdult: $isAdult) { ${MEDIA_FRAGMENT} }
       }
     }
   `;
-  const data = (await queryAniList(query, { page, perPage, genre })) as AniListResponse;
+  const data = (await queryAniList(query, { page, perPage, genre, isAdult: forceAdult })) as AniListResponse;
   return data.data.Page.media;
 }
 
