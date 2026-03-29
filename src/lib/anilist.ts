@@ -4,6 +4,7 @@ const ANILIST_URL = "https://graphql.anilist.co";
 
 const MEDIA_FRAGMENT = `
   id
+  idMal
   title { romaji english native }
   description
   coverImage { extraLarge large color }
