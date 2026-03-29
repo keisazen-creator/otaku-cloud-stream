@@ -10,7 +10,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, displayName?: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
-  signInWithGoogle: () => Promise<void>;
+  
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
