@@ -3,7 +3,6 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Play, Plus, Check, Share2, Star, Calendar, Film, Clock, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { getAnimeById, getAnimeByGenre } from "@/lib/anilist";
-import { kogemiAnimeInfo } from "@/lib/kogemi";
 import type { Anime } from "@/lib/types";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -29,11 +28,6 @@ export default function AnimeDetail() {
       .then((a) => {
         setAnime(a);
         setEpisodeCount(a.episodes || 12);
-        // Try to get more accurate episode count from Kogemi
-        const title = a.title.english || a.title.romaji;
-        kogemiAnimeInfo(title).then((info) => {
-          if (info.episodes) setEpisodeCount(info.episodes);
-        }).catch(() => {});
         // Load similar anime
         if (a.genres.length > 0) {
           getAnimeByGenre(a.genres[0], 1, 12).then(setSimilar).catch(() => {});
