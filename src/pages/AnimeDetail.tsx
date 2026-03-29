@@ -3,7 +3,6 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Play, Plus, Check, Share2, Star, Calendar, Film, Clock, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { getAnimeById, getAnimeByGenre } from "@/lib/anilist";
-import { kogemiAnimeInfo } from "@/lib/kogemi";
 import type { Anime } from "@/lib/types";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
