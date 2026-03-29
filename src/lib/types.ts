@@ -1,5 +1,6 @@
 export interface Anime {
   id: number;
+  idMal: number | null;
   title: {
     romaji: string;
     english: string | null;
